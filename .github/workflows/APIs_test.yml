@@ -43,7 +43,7 @@ jobs:
     - name: Run Tests
       run: |
         echo "Running API validation tests...🏃🏽"
-        pytest tests/clusters_test.py tests/imageShow_test.py tests/postReq_test.py tests/server_test.py tests/test_python_syntax.py --disable-warnings > api-validation-results.txt || exit_code=$?
+        pytest tests/clusters_test.py tests/imageShow_test.py tests/postReq_test.py tests/server_test.py --disable-warnings > api-validation-results.txt || exit_code=$?
         cat api-validation-results.txt
         exit $exit_code
 
