@@ -1,35 +1,61 @@
-name: End-to-end GUI tests
+name: Frontend and GUI Tests
 
 on:
   push:
     branches:
-      - amir
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  cypress-run:
-    runs-on: ubuntu-22.04
+  test-frontend:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'  # Specify your Node.js version
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Build frontend
-        run: npm run build # Adjust this if you have a different build command
+    - name: Run ESLint
+      run: npm run lint
 
-      - name: Start frontend server
-        run: npm start &  
+    - name: Run Jest tests
+      run: npm run test
 
-      - name: Wait for server to be ready
-        run: sleep 10 # Adjust the sleep time based on how long your server takes to start
+  test-gui:
+    runs-on: ubuntu-latest
 
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v5
-        with:
-          start: npm start
+    services:
+      xvfb: # Needed for Cypress to run GUI tests
+        image: cypress/base:10
+        options: >-
+          --privileged
+          --name xvfb
+          --network host
+          --entrypoint "Xvfb"
+          -- Xvfb :99 -screen 0 1920x1080x24
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress GUI tests
+      run: npm run cypress:run
+      env:
+        DISPLAY: ":99"
