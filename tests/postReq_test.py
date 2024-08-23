@@ -45,7 +45,7 @@ class ClusterAPITestCase(unittest.TestCase):
     def test_select_cluster_error(self, mock_collect_images):
         with self.assertLogs('root', level='ERROR'):
             mock_collect_images.side_effect = Exception("Processing error")
-            response = self.client.get('/api/selected-cluster', json={'cluster': 'test-cluster'})
+            response = self.client.post('/api/selected-cluster', json={'cluster': 'test-cluster'})
             self.assertEqual(response.status_code, 500)
             self.assertEqual(response.get_json(), {'error': 'Processing error'})
 
