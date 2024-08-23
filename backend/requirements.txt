@@ -1,1 +1,3 @@
 kubernetes
+Flask-Cors
+ruamel.yaml
