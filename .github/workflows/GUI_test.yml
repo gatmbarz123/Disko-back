@@ -11,6 +11,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
-      - name: Cypress run
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Specify your Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build frontend
+        run: npm run dev # Adjust this if you have a different build command
+
+      - name: Start frontend server
+        run: npm start &  
+
+      - name: Wait for server to be ready
+        run: sleep 10 # Adjust the sleep time based on how long your server takes to start
+
+      - name: Run Cypress tests
         uses: cypress-io/github-action@v5
+        with:
+          start: npm start
