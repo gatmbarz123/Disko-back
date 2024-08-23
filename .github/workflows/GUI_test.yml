@@ -21,7 +21,7 @@ jobs:
         run: npm install
 
       - name: Build frontend
-        run: npm run dev # Adjust this if you have a different build command
+        run: npm run build # Adjust this if you have a different build command
 
       - name: Start frontend server
         run: npm start &  
