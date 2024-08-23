@@ -3,10 +3,10 @@ name: Frontend and GUI Tests
 on:
   push:
     branches:
-      - main
+      - amir
   pull_request:
     branches:
-      - main
+      - amir
 
 jobs:
   test-frontend:
