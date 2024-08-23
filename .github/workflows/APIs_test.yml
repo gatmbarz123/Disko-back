@@ -62,7 +62,7 @@ jobs:
     - name: Print Test Status
       if: failure()
       run: |
-        echo "API validation tests failed ❌💀. Please check the results above."
+        echo "API validation tests failed! ❌💀. Please check the results above."
 
     - name: Final Message
       if: success()
