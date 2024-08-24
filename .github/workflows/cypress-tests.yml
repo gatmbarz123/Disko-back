@@ -3,8 +3,10 @@ name: Cypress UI Test
 on: 
   push:
     branches:
-      - amir
+      - amir  # Trigger the workflow on pushes to the 'amir' branch
   pull_request:
+    branches:
+      - amir  # Trigger the workflow on pull requests to the 'amir' branch
 
 jobs:
   cypress-run:
@@ -27,10 +29,15 @@ jobs:
           cd frontend
           npm install
 
+      - name: Build the application
+        run: |
+          cd frontend
+          npm run build  # Build the Next.js application for production
+
       - name: Start the application
         run: |
           cd frontend
-          npm run start &
+          npm run start &  # Start the Next.js application in production mode
           npx wait-on http://localhost:3000
 
       - name: Run Cypress tests
