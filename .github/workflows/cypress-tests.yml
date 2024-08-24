@@ -24,6 +24,7 @@ jobs:
 
       - name: Start the application
         run: |
+          cd frontend
           npm run start &
           npx wait-on http://localhost:3000
 

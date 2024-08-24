@@ -1,12 +1,13 @@
-const { defineConfig } = require("cypress");
-
-module.exports = defineConfig({
+module.exports = {
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
-    baseUrl: 'http://localhost:3000', 
-    viewportWidth: 1280,  
-    viewportHeight: 720,  
+    // Folder where Cypress should look for test files
+    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+
+    // Base URL of the application under test
+    baseUrl: 'http://localhost:3000',
+
+    // Optionally, set the viewport size for the tests
+    viewportWidth: 1280,
+    viewportHeight: 720,
   },
-});
+};
