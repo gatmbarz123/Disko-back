@@ -171,7 +171,7 @@ export function CopyImageForm({ cluster, availableImages }: CopyImageFormProps) 
     );
 }
 
-const styles = {
+const styles: { [key: string]: CSSProperties } = {
     overlay: {
         position: 'fixed' as 'fixed',
         top: 0,
@@ -204,7 +204,7 @@ const styles = {
         width: '100%',
         padding: '8px',
         margin: '8px 0',
-        boxSizing: 'border-box',
+        boxSizing: 'border-box' as 'border-box',  // Type assertion here
         border: '1px solid #ccc',
         borderRadius: '4px',
     },
