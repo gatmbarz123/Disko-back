@@ -31,13 +31,16 @@ jobs:
         run: npm start &
         env:
           NODE_ENV: 'development'
-        timeout-minutes: 2
+        timeout-minutes: 5
 
       - name: Wait for server to be ready
-        run: sleep 5
+        run: |
+          echo "Waiting for server to start..."
+          sleep 20  
+          npx wait-on http://localhost:3000  # Wait until the server is responding
 
       - name: Run Cypress tests
-        run: npx cypress run --spec "cypress/integration/gui_spec.js"
+        run: npx cypress run --spec "cypress/e2e/gui_spec.cy.js"
 
       - name: Upload Cypress Artifacts on Failure
         if: failure()
