@@ -1,0 +1,61 @@
+name: Frontend and GUI Tests
+
+on:
+  push:
+    branches:
+      - amir
+  pull_request:
+    branches:
+      - amir
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run ESLint
+      run: npm run lint
+
+    - name: Run Jest tests
+      run: npm run test
+
+  test-gui:
+    runs-on: ubuntu-latest
+
+    services:
+      xvfb: # Needed for Cypress to run GUI tests
+        image: cypress/base:10
+        options: >-
+          --privileged
+          --name xvfb
+          --network host
+          --entrypoint "Xvfb"
+          -- Xvfb :99 -screen 0 1920x1080x24
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress GUI tests
+      run: npm run cypress:run
+      env:
+        DISPLAY: ":99"
