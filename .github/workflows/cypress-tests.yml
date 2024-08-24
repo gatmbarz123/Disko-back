@@ -3,7 +3,7 @@ name: Cypress UI Test
 on: 
   push:
     branches:
-      - amir
+      - main
   pull_request:
 
 jobs:
@@ -19,8 +19,13 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
+      - name: Install Root Dependencies
         run: npm ci
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm install
 
       - name: Start the application
         run: |
@@ -29,7 +34,9 @@ jobs:
           npx wait-on http://localhost:3000
 
       - name: Run Cypress tests
-        run: npx cypress run
+        run: |
+          cd frontend
+          npx cypress run
 
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v3
