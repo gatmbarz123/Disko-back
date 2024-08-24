@@ -29,7 +29,6 @@ jobs:
         pip install pytest requests flask ruamel.yaml kubernetes docker flask-cors >> install.log 2>&1
         echo "Dependencies installed. Check install.log for details."
       
-
     - name: Verify Flask Installation
       run: |
         python -c "import importlib.metadata; print(f'Flask version: {importlib.metadata.version(\"flask\")}')"
@@ -43,6 +42,11 @@ jobs:
         echo "Running Flask server detection...🔍"
         python tests/api_finder.py > flask-server-results.txt
         cat flask-server-results.txt
+        api_count=$(grep -c "Detected Flask server" flask-server-results.txt)
+        test_count=$(ls -1 tests/*_test.py | wc -l)
+        if [ "$api_count" -gt "$test_count" ]; then
+          echo "Warning: Detected more API servers ($api_count) than tests ($test_count). Please ensure all APIs are tested."
+        fi
 
     - name: Run Tests
       run: |
