@@ -42,12 +42,6 @@ jobs:
         echo "Running Flask server detection...🔍"
         python tests/api_finder.py > flask-server-results.txt
         cat flask-server-results.txt
-        api_count=$(grep -c "Detected Flask server" flask-server-results.txt)
-        test_count=$(ls -1 tests/*_test.py | wc -l)
-        if [ "$api_count" -gt "$test_count" ]; then
-          echo "Warning: Detected more API servers ($api_count) than tests ($test_count). Please ensure all APIs are tested."
-          # Don't exit with an error code
-        fi
       shell: /usr/bin/bash -e {0}
 
     - name: Run Tests
