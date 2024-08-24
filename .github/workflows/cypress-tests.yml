@@ -1,57 +1,43 @@
-name: Cypress Tests
+name: Cypress UI Test
 
-on:
+on: 
   push:
     branches:
-      - amir
+      - main
   pull_request:
-    branches:
-      - amir
 
 jobs:
-  test-frontend:
+  cypress-run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout the repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Install Cypress
-        run: npx cypress install
+        run: npm ci
 
       - name: Start the application
-        run: npm start &
-        env:
-          NODE_ENV: 'development'
-        timeout-minutes: 5
-
-      - name: Wait for server to be ready
         run: |
-          echo "Waiting for server to start..."
-          sleep 20  
-          npx wait-on http://localhost:3000  # Wait until the server is responding
+          npm run start &
+          npx wait-on http://localhost:3000
 
       - name: Run Cypress tests
-        run: npx cypress run --spec "cypress/e2e/gui_spec.cy.js"
+        run: npx cypress run
 
-      - name: Upload Cypress Artifacts on Failure
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-
-      - name: Upload Cypress Videos on Failure
-        if: failure()
+      - name: Upload Cypress Videos
         uses: actions/upload-artifact@v3
         with:
           name: cypress-videos
-          path: cypress/videos
+          path: cypress/videos/**
+
+      - name: Upload Cypress Screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots/**
