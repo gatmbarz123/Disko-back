@@ -42,15 +42,3 @@ jobs:
 
       - name: Run Cypress tests
         run: npx cypress run  # Run Cypress from the root directory where `cypress.config.js` is located
-
-      - name: Upload Cypress Videos
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-videos
-          path: cypress/videos/**
-
-      - name: Upload Cypress Screenshots
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots/**
