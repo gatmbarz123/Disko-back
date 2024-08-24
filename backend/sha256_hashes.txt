@@ -69,6 +69,9 @@ diskoproject/repo_1.0:3.8-slim-bullseye - SHA256: 66e480a47a8434218c8d7d8ceb636a
 diskoproject/repo_1.0:3.8-slim-bullseye - SHA256: 66e480a47a8434218c8d7d8ceb636a908bce3b7ef0af725e677a872cd9ae7cb2
 diskoproject/repo_1.0:3.8-slim-bullseye - SHA256: 66e480a47a8434218c8d7d8ceb636a908bce3b7ef0af725e677a872cd9ae7cb2
 diskoproject/repo_1.0:3.8-slim-bullseye - SHA256: 66e480a47a8434218c8d7d8ceb636a908bce3b7ef0af725e677a872cd9ae7cb2
+<<<<<<< HEAD
 diskoproject/repo_1.0:3.8-slim-bullseye - SHA256: 66e480a47a8434218c8d7d8ceb636a908bce3b7ef0af725e677a872cd9ae7cb2
 docker.io/kindest/local-path-provisioner:v20240202-8f1494ea - SHA256: d0aeb8905d5956a7117896acdbf8a7467fe5ddb12fea9f4b94c05fabc5236cd9
 diskoproject/repo_1.0:3.8-slim-bullseye - SHA256: 66e480a47a8434218c8d7d8ceb636a908bce3b7ef0af725e677a872cd9ae7cb2
+=======
+>>>>>>> 562b1af3dc8adb680a00447c4e74b95448196a6e
