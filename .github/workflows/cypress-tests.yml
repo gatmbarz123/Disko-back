@@ -3,7 +3,7 @@ name: Cypress UI Test
 on: 
   push:
     branches:
-      - main
+      - amir
   pull_request:
 
 jobs:
