@@ -17,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18.17.0'  # Ensure this matches the required Node.js version
 
       - name: Install Root Dependencies
         run: npm ci
