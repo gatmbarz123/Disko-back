@@ -41,9 +41,7 @@ jobs:
           npx wait-on http://localhost:3000
 
       - name: Run Cypress tests
-        run: |
-          cd frontend
-          npx cypress run
+        run: npx cypress run  # Run Cypress from the root directory where `cypress.config.js` is located
 
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v3
